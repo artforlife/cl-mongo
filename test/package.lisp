@@ -3,7 +3,7 @@
 (defpackage #:cl-mongo-test
   (:use #:common-lisp #:cl-mongo #:lisp-unit)
   (:export
-
+   :quick-test
    ;;
    ;; TBD
 

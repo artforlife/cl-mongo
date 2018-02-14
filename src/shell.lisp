@@ -71,6 +71,12 @@ ok in mosty cases. See nd for an alternative.
 	   (pp* result :stream stream :nd nd))))
     (format stream "~A~%" str)))
 
+(defmethod pp-json ((result cons) &key (stream t) (nd nil))
+  (let ((str 
+	 (with-output-to-string (stream)
+	   (pp* result :stream stream :nd nd))))
+   (concatenate 'string "{" str "}")))
+
 (defmethod pp* ((result cons) &key (stream t) (nd nil))
   (labels ((br+ ()
 	     (unless nd
@@ -79,11 +85,11 @@ ok in mosty cases. See nd for an alternative.
 	   (br- ()
 	     (unless nd
                (new-line stream)
-               (format stream "}")))
+               (format stream "},")))
 	   (pp-oid (value)
              (with-indent
                (new-line stream)
-               (format stream "\"_id\" -> objectid(")
+               (format stream "\"_id\" : objectid(")
                (let* ((arr  (id value))
                       (size (length arr)))
                  (dotimes (index size)
@@ -91,7 +97,7 @@ ok in mosty cases. See nd for an alternative.
                      (if (< x 10)
                          (format stream "0~1X" x)
                          (format stream "~2X" x)))))
-               (format stream ")")))
+               (format stream "),")))
 	   (pp* (value)
              (typecase value
                (document   (pp-doc  value))
@@ -107,7 +113,7 @@ ok in mosty cases. See nd for an alternative.
                   (pp* el)
                   (when next?
                     (format stream ", "))
-                finally (format stream "]")))
+                finally (format stream "],")))
 	   (pp-doc (d)
              (with-indent
                (br+)
@@ -119,8 +125,9 @@ ok in mosty cases. See nd for an alternative.
              (with-indent
                (maphash (lambda (key value)
                           (new-line stream)
-                          (format stream "\"~A\"  -> " key)
-                          (pp* value)) ht))))
+                          (format stream "\"~A\"  : " key)
+                          (pp* value)
+			  ) ht))))
     (let ((*indent* 0))
       (dolist (d (docs result))
         (pp-doc d)))))

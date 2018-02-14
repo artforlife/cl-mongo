@@ -57,6 +57,7 @@
    :nwd
    #+(or sbcl clisp allegro abcl)    :cwd
    :pp
+   :pp-json
    :ret
    :iter
    :nd

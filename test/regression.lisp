@@ -1,4 +1,4 @@
-(in-package :cl-mongo-test)
+
 
 (defvar *test-collection* "foo" "name of the test collection")
 
@@ -559,18 +559,18 @@
     (db.sort-regression  :collection collection :size size :wait wait))
   (with-test-package "matching document elements by field"
     (db.find-elem-match-regression :collection collection :size size :wait wait))
-  (with-test-package "advanced query regression elements"
-    (db.find-advanced-query-regression :collection collection :size size :wait wait))
-  (with-test-package "advanced query regression elements; part 2"
-    (db.find-advanced-query-regression-2 :collection collection :size size :wait wait))
-  (with-test-package "test update modifiers"
-    (test-modifiers :collection collection :size size :wait wait))
-  (with-test-package "test java script (local and remote)"
-    (test-javascript :collection collection :size size :wait wait))
-  (with-test-package "test map-reduce)"
-    (test-map-reduce :collection collection :size size :wait wait))
-  (with-test-package "test indexing"
-    (test-indexing :collection collection :size size :wait wait))
+  ;; (with-test-package "advanced query regression elements"
+  ;;   (db.find-advanced-query-regression :collection collection :size size :wait wait))
+  ;; (with-test-package "advanced query regression elements; part 2"
+  ;;   (db.find-advanced-query-regression-2 :collection collection :size size :wait wait))
+  ;; (with-test-package "test update modifiers"
+  ;;   (test-modifiers :collection collection :size size :wait wait))
+  ;; (with-test-package "test java script (local and remote)"
+  ;;   (test-javascript :collection collection :size size :wait wait))
+  ;; (with-test-package "test map-reduce)"
+  ;;   (test-map-reduce :collection collection :size size :wait wait))
+  ;; (with-test-package "test indexing"
+  ;;   (test-indexing :collection collection :size size :wait wait))
   (with-test-package "test serialization; inspect visually"
     (test-serialization :collection collection :size size :wait wait)))
 
