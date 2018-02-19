@@ -111,6 +111,9 @@
    :install-js
    :remove-js
 
+   ;;json returns
+   :document-to-hash-form
+
    ;; multi-threaded stuff 
 
    :do-query

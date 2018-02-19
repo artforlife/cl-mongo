@@ -40,6 +40,7 @@
 		 (:file "bson-encode-container")
 		 (:file "protocol")
 		 (:file "mongo")
+		 (:file "json")
 		 (:file "db")
 		 (:file "mem")
 		 (:file "do-query")
